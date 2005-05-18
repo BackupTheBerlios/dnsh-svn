@@ -1,0 +1,15 @@
+These classes need to be implemented:
+
+  NamespaceEntry
+  TypeContainer
+  IIteratorContainer
+  Block
+  Parameters
+  Expression
+  Stack
+  SourceFile
+
+These are just classes for the parser, others may be implemented as necessary for 
+actually compiling, and names may be changed as appropriate (just make sure the jay file 
+gets updated as well).
+  

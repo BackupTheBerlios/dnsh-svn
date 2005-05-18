@@ -1,0 +1,122 @@
+//#!/bin/dnsh -s
+
+// Default Dotnet Shell (dnsh) Profile
+
+profile "dnsh::default"
+
+// Import the namespaces across all of the profiles defined in this file.
+[global]
+using Dotnetshell;
+[global]
+using Dotnetshell.Commandlets;
+[global]
+using Dotnetshell.Hooks;
+
+module Dnsh.Profiles.Default
+
+// If a command doesnt have a prefix associated with it
+// when we attempt to call it, dnsh will look under this
+// prefix before throwing a CommandletNotFound exception.
+prefix dnsh;
+
+DollarSign() {
+	uid = $cmds.GetEnvironment()["UserID"];
+
+	if ( $uid == 0 )
+		return "#";
+	else
+		return "$";
+}
+
+[CommandletHook("dnsh::setprompt")]
+SetPrompt() {
+	if ( $use_color )
+	{
+		if ( $cmds.GetEnvironment()["UserID"] == 0 )
+			return prompt.Format("[\x1B01;31m]{h} [\x1B[01;34m]{W} {$} [\x1B[00m]");
+		else
+			return prompt.Format("[\x1B[01;32m]{u}@{h} [\x1B[01;34m]{w} {$} [\x1B[00m]");
+	}
+	else
+	{
+		if ( $cmds.GetEnvironment()["UserID"] == 0 )
+			return prompt.Format("{u}@{h} {W} {$}");
+		else
+			return prompt.Format("{u}@{h} {w} {$}");
+
+	}
+}
+
+
+// This sets up aliases to some well-known commands to their internal
+// dnsh commandlets.
+option("alias::UNIX") {
+	alias cd = $cmds.ChangeDirectory;
+	alias pushd = $cmds.PushDirectory;
+	alias popd = $cmds.PopDirectory;
+	alias ls = $cmds.ListDirectory;
+	alias pwd = $cmds.PrintWorkingDirectory;
+}
+
+// This demonstrates an anonymous global block
+global {
+	cmds = $Dotnetshell.GetCommandlets("dnsh");
+
+	// Comment this out to not use the above aliases.
+	// Also, you can use dnsh::option set and dnsh::option unset commands
+	// from the command line.
+		
+	option set "alias::UNIX";
+
+	// Set up some common options people like
+
+	option set "dnsh::CommandHistory" "on";
+	option set "dnsh::HistoryLenth" "255";
+	option set "dnsh::Completion" "on";
+	option set "dnsh::CompletionChar" "dnshkeys::Tab";
+}
+
+// Even though the actual shell supports external commands without specifying anything, we set -s at the top
+// so we must declare external calls first.  This speeds up lookup times considerably.
+
+// a named global block
+global("gentoo") {
+	// This section is taken from Gentoo's bashrc.
+
+	/* Test for an interactive shell.  There is no need to set anything
+	 * past this point for scp and rcp, and it's important to refrain from
+	 * outputting anything in those cases
+	 */
+	if($type != "interactive" || $type != "i")
+		// Shell is non-interactive, be done now
+		return;
+
+	// Set colorful PS1 only on colorful terminals.
+	// dircolors --print-database uses its own built-in database
+	// instead of using /etc/DIR_COLORS.  Try to use the external file
+	// first to take advantage of user additions.
+	use_color=false;
+	safe_term=${TERM\\[^[:alnum:]]\.};	// Sanitize TERM
+
+	// Normally, Path.Find would just return a string, however we need to get a DnshProcess object, so
+	// we prefix it with @ to run the process version.
+	[external] grep=@Path.Find("grep");
+	[external] dircolors=@Path.Find("dircolors");
+
+	if ( File.Exists("/etc/DIR_COLORS" && @grep -q "^TERM ${safe_term}" /etc/DIR_COLORS )
+		use_color = true;
+	else if ( @dircolors --print-database | @grep -q "^TERM ${safe_term}" )
+		use_color = true;
+        
+	setprompt
+
+	[external] keychain=@Path.Find("keychain");
+	PATH="/home/urilith/bin:$PATH"
+	export("PATH")
+	@keychain id_dsa
+
+	source ~/.keychain/dreamshadow-dnsh
+
+	export CVS_RSH=ssh
+	export CVSROOT=:ext:urilith@cvs.gentoo.org:/var/cvsroot
+}

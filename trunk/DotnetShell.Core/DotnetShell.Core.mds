@@ -1,0 +1,16 @@
+<Combine name="DotnetShell.Core" fileversion="2.0">
+  <Configurations>
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Core" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Core" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="DotnetShell.Core" single="True">
+    <Execute type="None" entry="DotnetShell.Core" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./DotnetShell.Core.mdp" />
+  </Entries>
+</Combine>
