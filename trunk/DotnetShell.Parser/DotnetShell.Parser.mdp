@@ -1,13 +1,13 @@
-<Project name="DotnetShell.Core" fileversion="2.0" language="C#" ctype="DotNetProject">
+<Project name="DotnetShell.Parser" fileversion="2.0" language="C#" ctype="DotNetProject">
   <Configurations>
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="DotnetShell.Core" />
+      <Output directory="./bin/Debug" assembly="DotnetShell.Parser" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" />
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Release" assembly="DotnetShell.Core" />
+      <Output directory="./bin/Release" assembly="DotnetShell.Parser" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" />
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
@@ -20,6 +20,5 @@
   <Contents>
     <File name="./MyClass.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Samples/profile.dnsh" subtype="Code" buildaction="Nothing" />
   </Contents>
 </Project>

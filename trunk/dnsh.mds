@@ -1,0 +1,24 @@
+<Combine name="dnsh" fileversion="2.0">
+  <Configurations>
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Core" />
+      <Entry build="True" name="DotnetShell" />
+      <Entry build="True" name="DotnetShell.Parser" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Core" />
+      <Entry build="True" name="DotnetShell" />
+      <Entry build="True" name="DotnetShell.Parser" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="dnsh" single="True">
+    <Execute type="None" entry="DotnetShell.Core" />
+    <Execute type="None" entry="DotnetShell" />
+    <Execute type="None" entry="DotnetShell.Parser" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./DotnetShell.Core/DotnetShell.Core.mdp" />
+    <Entry filename="./DotnetShell/DotnetShell.mdp" />
+    <Entry filename="./DotnetShell.Parser/DotnetShell.Parser.mdp" />
+  </Entries>
+</Combine>

@@ -1,0 +1,16 @@
+<Combine name="DotnetShell.Parser" fileversion="2.0">
+  <Configurations>
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Parser" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="DotnetShell.Parser" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="DotnetShell.Parser" single="True">
+    <Execute type="None" entry="DotnetShell.Parser" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./DotnetShell.Parser.mdp" />
+  </Entries>
+</Combine>
