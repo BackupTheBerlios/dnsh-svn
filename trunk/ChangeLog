@@ -1,0 +1,6 @@
+Fri May 20, 2005 Michael Tindal (mtindal@paradoxpoint.com) -0500
+A   svkchangelog
+  * Tool to automatically create ChangeLog entries.
+A   svkcommit
+  * Tool to automatically generate commit messages from ChangeLog entries.
+
