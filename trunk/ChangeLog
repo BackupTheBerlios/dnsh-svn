@@ -1,4 +1,8 @@
 Wed Jun 01, 2005 Michael Tindal (mtindal@paradoxpoint.com) -0500
+M   AUTHORS
+  * Change my e-mail.
+
+Wed Jun 01, 2005 Michael Tindal (mtindal@paradoxpoint.com) -0500
 A   DotnetShell.Parser/dnsh.g
   * New Antlr parser.
 D   DotnetShell.Parser/dnsh-parser.jay
